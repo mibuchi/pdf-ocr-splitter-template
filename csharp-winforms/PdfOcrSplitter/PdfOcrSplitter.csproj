@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>PdfOcrSplitter</RootNamespace>
+    <AssemblyName>PdfOcrSplitter</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tesseract" Version="4.1.1" />
+    <PackageReference Include="PdfSharp-GDI" Version="1.50.5147" />
+    <PackageReference Include="UglyToad.PdfPig" Version="0.1.9" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+jpn.traineddata入手方法
+
+1. 公式GitHubリポジトリからダウンロード
+URL: https://github.com/tesseract-ocr/tessdata
+
+ここに各言語の学習済みデータが公開されています。
+
+直接 jpn.traineddata ファイルをダウンロードしてください。
+
+例: https://github.com/tesseract-ocr/tessdata/raw/main/jpn.traineddata
+
+2. Tesseract OCRをインストールした際のフォルダにある場合も
+WindowsでTesseractをインストールすると、
+
+makefile
+コピーする
+編集する
+C:\Program Files\Tesseract-OCR\tessdata\
+などにすでに jpn.traineddata があることがあります。
+
+✅ 配置場所
+あなたのプロジェクトの tessdata フォルダ（例：csharp-winforms/PdfOcrSplitter/tessdata/）に置いてください。
+
+または、TesseractEngine のコンストラクタで言語データのパスを指定してください。
+
+csharp
+コピーする
+編集する
+using (var engine = new TesseractEngine(@"./tessdata", "jpn", EngineMode.Default))
+✅ 補足
+jpn.traineddata は約20〜30MBあります。
+
+他の日本語用言語ファイル（jpn_vert.traineddata など）も必要に応じてダウンロード可能です。

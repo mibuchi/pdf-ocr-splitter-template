@@ -1,0 +1,81 @@
+---
+
+# Windows向け Tesseract OCR インストール＆設定手順
+
+---
+
+## 1. Tesseract本体のインストール
+
+1. 公式ビルド版（Windows用）ダウンロードページへアクセス
+   [https://github.com/tesseract-ocr/tesseract/releases/](https://github.com/tesseract-ocr/tesseract/releases/)
+
+2. 最新の安定版リリースの中から
+   例: `tesseract-5.3.1-win64.exe`（64bit版）をダウンロード
+
+3. ダウンロードした `.exe` を実行してインストール
+
+   * インストール先はデフォルトのままでOK（例：`C:\Program Files\Tesseract-OCR`）
+   * 「追加の言語データ」オプションがある場合は「Japanese (jpn)」を選択しても良いし、後から手動で入れてもOK
+
+---
+
+## 2. 言語データ（`jpn.traineddata`）の確認・配置
+
+* インストールフォルダの中にある `tessdata` フォルダを確認
+  `C:\Program Files\Tesseract-OCR\tessdata\jpn.traineddata` があればOK
+
+* なければ、[tessdataリポジトリ](https://github.com/tesseract-ocr/tessdata)から直接ダウンロードして
+  プロジェクトの `tessdata` フォルダに置くか、インストール先の `tessdata` フォルダに入れてください
+
+---
+
+## 3. 環境変数 PATH の設定（任意）
+
+* コマンドプロンプトや他アプリから `tesseract` コマンドを使いたい場合は
+  `C:\Program Files\Tesseract-OCR` を環境変数 PATH に追加します
+
+### 設定手順
+
+1. 「Windowsの設定」 → 「システム」 → 「バージョン情報」 → 「システムの詳細設定」
+2. 「環境変数」ボタンをクリック
+3. 「システム環境変数」の `Path` を選択 → 「編集」
+4. 「新規」で `C:\Program Files\Tesseract-OCR` を追加 → OKで閉じる
+
+---
+
+## 4. C#コードからの使い方（例）
+
+```csharp
+using Tesseract;
+
+var tessdataPath = @"C:\Program Files\Tesseract-OCR\tessdata";
+using var engine = new TesseractEngine(tessdataPath, "jpn", EngineMode.Default);
+```
+
+---
+
+## 5. Pythonコードからの使い方（例）
+
+```python
+import pytesseract
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+text = pytesseract.image_to_string("sample.png", lang="jpn")
+print(text)
+```
+
+---
+
+## 6. 動作確認
+
+* コマンドプロンプトを開いて以下を実行してみてください
+
+```bash
+tesseract --version
+```
+
+* もしバージョン情報が表示されれば成功です
+
+---
+
+必要に応じて、さらに細かい設定やトラブルシューティングもお手伝いしますのでお気軽にどうぞ！
